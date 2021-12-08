@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended :false })); ///middleware
 
 
 
-mongoose.connect(process.env.MONGODB_URL ||'mongodb://localhost/techfortress', {
+mongoose.connect(process.env.MONGODB_URL ||'mongodb+srv://techfortress:techfortress@cluster0.pff17.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true, //to get ride from duplicate waring
     useUnifiedTopology: true,
     
