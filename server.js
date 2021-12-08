@@ -13,7 +13,7 @@ const DB = 'mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongod
 
 mongoose.connect(DB,{
     useNewUrlParser: true,
-    useCreateIndex: true,
+    // useCreateIndex: true,
     useUnifiedTopology : true,
     // useFindAndModify : false
 }).then(()=> {
