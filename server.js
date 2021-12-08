@@ -5,19 +5,20 @@ import { contactRouter } from './routers/contactRouter.js';
 import { userRouter } from './routers/userRouter.js';
 
 
-
 const app = express();
 app.use(express.json()); ////middleware
 app.use(express.urlencoded({ extended :false })); ///middleware
 
+const DB = 'mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongodb.net/techfortress?retryWrites=true&w=majority';
 
-
-mongoose.connect(process.env.MONGODB_URL ||'mongodb://localhost/techfortress', {
-    useNewUrlParser: true, //to get ride from duplicate waring
-    useUnifiedTopology: true,
-    
-
-})
+mongoose.connect(DB,{
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology : true,
+    // useFindAndModify : false
+}).then(()=> {
+    console.log("connection successfull")
+}).catch((err)=> console.log(err))
 
 
 app.use('/api/message', contactRouter);
