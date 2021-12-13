@@ -13,8 +13,8 @@ export const contactRouter = express.Router();
 
 contactRouter.post('/', expressAsynchandler(async (req,res)=>{
     const contact = new Contact({
+        name:req.body.name,
         email:req.body.email,
-        phone:req.body.phone,
         message:req.body.message
     })
     const newContact = await contact.save();
