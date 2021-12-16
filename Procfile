@@ -1,1 +1,1 @@
-web: nodemon --watch server --exec node --experimental-modules server.js
+web: nodemon --watch backend --exec node --experimental-modules server.js
