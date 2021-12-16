@@ -1,23 +1,27 @@
 import express from 'express';
+import cors from 'cors'
 import mongoose from 'mongoose';
 import { blogRouter } from './routers/blogRouter.js';
 import { contactRouter } from './routers/contactRouter.js';
 import { userRouter } from './routers/userRouter.js';
 
 
-
 const app = express();
+app.use(cors())
 app.use(express.json()); ////middleware
 app.use(express.urlencoded({ extended :false })); ///middleware
 
+const DB = 'mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongodb.net/techfortress?retryWrites=true&w=majority';
 
 
-mongoose.connect(process.env.MONGODB_URL ||'mongodb+srv://techfortress:techfortress@cluster0.pff17.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-    useNewUrlParser: true, //to get ride from duplicate waring
-    useUnifiedTopology: true,
-    
-
-})
+mongoose.connect(DB,{
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    useUnifiedTopology : true,
+    // useFindAndModify : false
+}).then(()=> {
+    console.log("connection successfull")
+}).catch((err)=> console.log(err))
 
 
 app.use('/api/message', contactRouter);
@@ -34,7 +38,7 @@ app.use((err, req, res, next) =>{
 })
 
 
-const port = 5000
+const port = process.env.PORT || 5000
 app.listen(port, ()=>{
     console.log(`server is running at http://localhost:${port}`)
 })
