@@ -1,11 +1,12 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
 import Blog from '../models/blog.js'
+import { isAuth } from '../utils.js'
 
 export const blogRouter = express.Router()
 
 
-blogRouter.post('/addBlog', expressAsyncHandler(async(req,res)=>{
+blogRouter.post('/addBlog',isAuth, expressAsyncHandler(async(req,res)=>{
     const blog = new Blog({
         title: req.body.title,
         image:req.body.image,

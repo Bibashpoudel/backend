@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 
 const  UserBlogSchema = new mongoose.Schema({
-    Fullname:{
+    fullname:{
         type:String,
         required:true
     },
@@ -10,12 +10,10 @@ const  UserBlogSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-   
     blog:{
-        type:File,
+        type:String,
         required:true
     }
-   
 },
 {
     timestamps:true

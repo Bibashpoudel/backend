@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 
 const  CVSchema = new mongoose.Schema({
-    Fullname:{
+    fullname:{
         type:String,
         required:true
     },

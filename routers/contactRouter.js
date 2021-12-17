@@ -11,7 +11,7 @@ export const contactRouter = express.Router();
 
 //send message request 
 
-contactRouter.post('/', expressAsynchandler(async (req,res)=>{
+contactRouter.post('/send', expressAsynchandler(async (req,res)=>{
     const contact = new Contact({
         name:req.body.name,
         email:req.body.email,
@@ -23,3 +23,11 @@ contactRouter.post('/', expressAsynchandler(async (req,res)=>{
     }
     return res.status(500).send({messsage:"Somethings went wrong"})
 }) )
+contactRouter.get('/', expressAsynchandler(async(req,res)=>{
+    try {
+        const data = await Contact.find()
+        return res.send(data)
+    } catch (error) {
+        return res.send(error)
+    }
+}))

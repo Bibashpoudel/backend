@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import { blogRouter } from './routers/blogRouter.js';
 import { contactRouter } from './routers/contactRouter.js';
 import { userRouter } from './routers/userRouter.js';
+import { userBlogRouter } from './routers/userBlogRouter.js';
 
 
 const app = express();
@@ -27,6 +28,7 @@ mongoose.connect(DB,{
 app.use('/api/message', contactRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/user', userRouter);
+app.use('/api/userblog', userBlogRouter)
 app.get('/',(req,res)=>{
     res.send("hello world");
 })
