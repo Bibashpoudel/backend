@@ -1,43 +1,48 @@
-import express from 'express';
-import cors from 'cors'
-import mongoose from 'mongoose';
-import { blogRouter } from './routers/blogRouter.js';
-import { contactRouter } from './routers/contactRouter.js';
-import { userRouter } from './routers/userRouter.js';
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import { blogRouter } from "./routers/blogRouter.js";
+import { contactRouter } from "./routers/contactRouter.js";
+import { userRouter } from "./routers/userRouter.js";
 
+var corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
 
-const app = express();
-app.use(cors())
+var app = express();
+app.use(cors(corsOptions));
 app.use(express.json()); ////middleware
-app.use(express.urlencoded({ extended :false })); ///middleware
+app.use(express.urlencoded({ extended: false })); ///middleware
 
-const DB = 'mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongodb.net/techfortress?retryWrites=true&w=majority';
+const DB =
+  "mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongodb.net/techfortress?retryWrites=true&w=majority";
 
-mongoose.connect(DB,{
+mongoose
+  .connect(DB, {
     useNewUrlParser: true,
     // useCreateIndex: true,
-    useUnifiedTopology : true,
+    useUnifiedTopology: true,
     // useFindAndModify : false
-}).then(()=> {
-    console.log("connection successfull")
-}).catch((err)=> console.log(err))
+  })
+  .then(() => {
+    console.log("connection successfull");
+  })
+  .catch((err) => console.log(err));
 
-
-app.use('/api/message', contactRouter);
-app.use('/api/blog', blogRouter);
-app.use('/api/user', userRouter);
-app.get('/',(req,res)=>{
-    res.send("hello world");
-})
-
+app.use("/api/message", contactRouter);
+app.use("/api/blog", blogRouter);
+app.use("/api/user", userRouter);
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
 
 //error cather middlerware
-app.use((err, req, res, next) =>{
-    res.status(500).send({message:err.message})
-})
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
 
-
-const port = process.env.PORT || 5000
-app.listen(port, ()=>{
-    console.log(`server is running at http://localhost:${port}`)
-})
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`server is running at http://localhost:${port}`);
+});
