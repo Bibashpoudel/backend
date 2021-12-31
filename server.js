@@ -4,9 +4,13 @@ import mongoose from "mongoose";
 import { blogRouter } from "./routers/blogRouter.js";
 import { contactRouter } from "./routers/contactRouter.js";
 import { userRouter } from "./routers/userRouter.js";
+import { CVRouter } from "./routers/cvRouter.js";
 
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: [
+    "https://techfortress-backend.herokuapp.com",
+    "http://localhost:3000",
+  ],
   optionsSuccessStatus: 200,
 };
 
@@ -30,6 +34,7 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+app.use("/api/cv", CVRouter);
 app.use("/api/message", contactRouter);
 app.use("/api/blog", blogRouter);
 app.use("/api/user", userRouter);
