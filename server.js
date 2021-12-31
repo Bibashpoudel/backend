@@ -6,19 +6,9 @@ import { contactRouter } from "./routers/contactRouter.js";
 import { userRouter } from "./routers/userRouter.js";
 import { CVRouter } from "./routers/cvRouter.js";
 
-var whitelist = [
-  "https://techfortress-backend.herokuapp.com",
-  "http://localhost:3000",
-];
 var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  optionsSuccessStatus: 200,
+  origin: "https://techfortress-backend.herokuapp.com",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 var app = express();
