@@ -6,7 +6,7 @@ import { contactRouter } from "./routers/contactRouter.js";
 import { userRouter } from "./routers/userRouter.js";
 
 var corsOptions = {
-  origin: "https://chitwan.herokuapp.com",
+  origin: "http://chitwan.herokuapp.com",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
