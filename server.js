@@ -1,3 +1,4 @@
+
 import express from 'express';
 import cors from 'cors'
 import mongoose from 'mongoose';
@@ -10,19 +11,29 @@ import uploadRouter from './routers/UploadRouter.js';
 import { CVRouter } from './routers/cvRouter.js';
 
 
-const app = express();
-app.use(cors())
+
+
+var corsOptions = {
+  origin: "http://chitwan.herokuapp.com",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+var app = express();
+app.use(cors(corsOptions));
+
 app.use(express.json()); ////middleware
-app.use(express.urlencoded({ extended :false })); ///middleware
+app.use(express.urlencoded({ extended: false })); ///middleware
 
-const DB = 'mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongodb.net/techfortress?retryWrites=true&w=majority';
+const DB =
+  "mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongodb.net/techfortress?retryWrites=true&w=majority";
 
-
-mongoose.connect(DB,{
+mongoose
+  .connect(DB, {
     useNewUrlParser: true,
     // useCreateIndex: true,
-    useUnifiedTopology : true,
+    useUnifiedTopology: true,
     // useFindAndModify : false
+
 }).then(()=> {
     console.log("connection successfull")
 }).catch((err)=> console.log(err))
@@ -41,14 +52,20 @@ app.get('/',(req,res)=>{
     res.send("hello world");
 })
 
+// "/api/message", contactRouter);
+// app.use("/api/blog", blogRouter);
+// app.use("/api/user", userRouter);
+// app.get("/", (req, res) => {
+//   res.send("hello world");
+// });
+// >>>>>>> 48ee464a55434ab854df63faf8401185c1c84ba4
 
-//error cather middlerware
-app.use((err, req, res, next) =>{
-    res.status(500).send({message:err.message})
-})
+// //error cather middlerware
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
 
-
-const port = process.env.PORT || 5000
-app.listen(port, ()=>{
-    console.log(`server is running at http://localhost:${port}`)
-})
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`server is running at http://localhost:${port}`);
+});
