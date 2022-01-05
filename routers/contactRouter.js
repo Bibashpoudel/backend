@@ -3,6 +3,7 @@ import express from 'express';
 import expressAsynchandler from 'express-async-handler'
 
 import Contact from '../models/contact.js'
+import { isAuth } from '../utils.js';
 
 
 export const contactRouter = express.Router();
@@ -23,7 +24,7 @@ contactRouter.post('/send', expressAsynchandler(async (req,res)=>{
     }
     return res.status(500).send({messsage:"Somethings went wrong"})
 }) )
-contactRouter.get('/', expressAsynchandler(async(req,res)=>{
+contactRouter.get('/', isAuth, expressAsynchandler(async(req,res)=>{
     try {
         const data = await Contact.find()
         return res.send(data)
