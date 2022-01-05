@@ -1,7 +1,7 @@
 import express from "express"
 import expressAsyncHandler from "express-async-handler"
-import CV from "../models/cv"
-import { isAuth } from "../utils"
+import CV from "../models/cv.js"
+import { isAuth } from "../utils.js"
 
 
 

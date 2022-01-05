@@ -76,7 +76,7 @@ userRouter.post('/signin', async(req, res)=>{
            res.send({
                id:user.id,
                username:user.username,
-               email:user.phone,
+               email:user.email,
                token:generateToken(user),
            });
            return;

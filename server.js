@@ -1,10 +1,13 @@
 import express from 'express';
 import cors from 'cors'
 import mongoose from 'mongoose';
+import path from 'path'
 import { blogRouter } from './routers/blogRouter.js';
 import { contactRouter } from './routers/contactRouter.js';
 import { userRouter } from './routers/userRouter.js';
 import { userBlogRouter } from './routers/userBlogRouter.js';
+import uploadRouter from './routers/UploadRouter.js';
+import { CVRouter } from './routers/cvRouter.js';
 
 
 const app = express();
@@ -24,11 +27,16 @@ mongoose.connect(DB,{
     console.log("connection successfull")
 }).catch((err)=> console.log(err))
 
-
+app.use('/api/cv', CVRouter)
+app.use('/api/uploads', uploadRouter)
 app.use('/api/message', contactRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/user', userRouter);
 app.use('/api/userblog', userBlogRouter)
+
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 app.get('/',(req,res)=>{
     res.send("hello world");
 })
