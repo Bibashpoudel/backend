@@ -9,9 +9,9 @@ import { userRouter } from './routers/userRouter.js';
 import { userBlogRouter } from './routers/userBlogRouter.js';
 import uploadRouter from './routers/UploadRouter.js';
 import { CVRouter } from './routers/cvRouter.js';
+import dotenv  from 'dotenv'
 
-
-
+dotenv.config()
 
 var corsOptions = {
   origin: "http://chitwan.herokuapp.com",
@@ -24,8 +24,7 @@ app.use(cors(corsOptions));
 app.use(express.json()); ////middleware
 app.use(express.urlencoded({ extended: false })); ///middleware
 
-const DB =
-  "mongodb+srv://techfortress:techfortressAdmin$$@cluster0.iaxsi.mongodb.net/techfortress?retryWrites=true&w=majority";
+const DB = process.env.MONGO_DB_URL
 
 mongoose
   .connect(DB, {
